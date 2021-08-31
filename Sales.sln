@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31410.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesApp", "SalesApp\SalesApp.csproj", "{250BC166-6F1D-477E-8611-41A427CDDC8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Show", "Show\Show.csproj", "{3BD17C6F-2213-4876-B31C-EDF3DCBE4512}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{250BC166-6F1D-477E-8611-41A427CDDC8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{250BC166-6F1D-477E-8611-41A427CDDC8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{250BC166-6F1D-477E-8611-41A427CDDC8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{250BC166-6F1D-477E-8611-41A427CDDC8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BD17C6F-2213-4876-B31C-EDF3DCBE4512}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BD17C6F-2213-4876-B31C-EDF3DCBE4512}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BD17C6F-2213-4876-B31C-EDF3DCBE4512}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BD17C6F-2213-4876-B31C-EDF3DCBE4512}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {383C048D-5C32-47F5-8715-B8BBB32633B8}
+	EndGlobalSection
+EndGlobal

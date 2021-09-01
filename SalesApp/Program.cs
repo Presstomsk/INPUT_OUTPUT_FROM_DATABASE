@@ -1,6 +1,8 @@
 ﻿using System;
 using MySql.Data.MySqlClient;
 using CLI;
+using SalesLib;
+
 
 namespace SalesApp
 {
@@ -8,38 +10,32 @@ namespace SalesApp
     {
         static void Main()
         {
-            
-            var data_base = new MySqlConnection(CONN_STR);
-            data_base.Open();
+            var db = new DataBase();            
+            var products = db.GetProducts();
+            var buyers = db.GetBuyers();
 
-            Show.Info("Выберите продукт, остатки которого хотите посмотреть");
-            Show.Info("1. Phone");
-            Show.Info("2. Car");
-            var select = Console.ReadLine();
-
-            var sql = $"SELECT count FROM tab_products_stock JOIN tab_products ON tab_products_stock.product_id = tab_products.id WHERE product_id = {select}";
-            var command = new MySqlCommand
+            foreach (var product in products)
             {
-                CommandText = sql,
-                Connection = data_base
-            };
-            var res = command.ExecuteReader();
-
-            if (res.HasRows)
-            {
-                do
-                {
-                    res.Read();
-                    var count = res.GetInt32("count");
-                    Show.Success($"count = {count}");
-                } while (res.NextResult());
+                Show.PrintLn($"{product.Id}:{product.Name},{product.Price}");
             }
-            else
+            Show.Print("Введите номер продукта:");
+            var product_id = uint.Parse(Console.ReadLine());
+            Show.Print("Введите количество:");
+            var count_user = uint.Parse(Console.ReadLine());
+
+            var count_stock = db.GetProductCount(product_id);
+
+            if (count_user > count_stock)
             {
-                Show.Error("Вернулась пустая таблица");
+                Show.Error("На складе нет необходимого количества товара");
+                return;
             }
 
-            data_base.Close();
+            var price = products[(int)(product_id-1)].Price;
+            var total_price = count_user * price;
+
+            Show.PrintLn($"Вам необходимо заплатить - {total_price}");
+                    
         }
 
         

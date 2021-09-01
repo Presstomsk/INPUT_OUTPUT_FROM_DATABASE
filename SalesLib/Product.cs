@@ -4,8 +4,9 @@ namespace SalesLib
 {
     public class Product
     {
-        public uint id { get; set; }
-        public string name { get; set; }
-        public uint price { get; set; }
+        
+        public uint Id { get; set; }
+        public string Name { get; set; }
+        public uint Price { get; set; }
     }
 }

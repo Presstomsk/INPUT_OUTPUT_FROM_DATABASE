@@ -53,7 +53,23 @@ namespace SalesApp
             var total_price = count_user * (price-price*buyer.Discount/100);
 
             Show.PrintLn($"Вам необходимо заплатить - {total_price}");
-                    
+            string symbol;
+            do
+            {
+                Show.Print("Вы хотите преобрести товар? (y/n):");
+                symbol = Console.ReadLine();
+                if (symbol == "n") return;
+
+            } while ((symbol != "y") && (symbol != "n"));
+
+            // Добавить в программу  возможность добавления данных о покупке после ввода всей необходимой информации.
+           // Т.е.нужно от пользователя получить данные для всех полей таблицы tab_orders и написать запрос на добавление в неё строки. 
+           // Id продавца задан по умолчанию.
+
+           db.AddNewOrder(buyer_id, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), product_id,count_user,total_price);
+
+
+
         }
 
         

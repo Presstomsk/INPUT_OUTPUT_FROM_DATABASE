@@ -93,6 +93,17 @@ namespace SalesLib
             return list;
         }
 
+        public void AddNewOrder(uint buyer_id,string date,uint product_id, uint amount, uint total_price, uint seller_id = 1)
+        {
+            Open();
+            var sql = @$"INSERT INTO tab_orders 
+                          (buyer_id, seller_id, date, product_id, amount, total_price)
+                        VALUES ({buyer_id}, {seller_id}, '{date}', {product_id}, {amount}, {total_price});";
+            command.CommandText = sql;
+            command.ExecuteNonQuery();
+            Close();
+        }
+
        
     }
 }

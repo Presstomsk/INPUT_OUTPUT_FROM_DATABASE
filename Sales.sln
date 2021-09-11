@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesApp", "SalesApp\SalesA
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI", "Show\CLI.csproj", "{3BD17C6F-2213-4876-B31C-EDF3DCBE4512}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SalesLib", "SalesLib\SalesLib.csproj", "{F60A6FFE-8CAB-4AFE-ABFA-408A04648D9E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesLib", "SalesLib\SalesLib.csproj", "{F60A6FFE-8CAB-4AFE-ABFA-408A04648D9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{B42C6140-FAA5-4D4E-A381-9DDCB532E1A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

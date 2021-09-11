@@ -9,7 +9,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLI", "Show\CLI.csproj", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SalesLib", "SalesLib\SalesLib.csproj", "{F60A6FFE-8CAB-4AFE-ABFA-408A04648D9E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Config", "Config", "{B42C6140-FAA5-4D4E-A381-9DDCB532E1A1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{380E7C0D-E997-40BA-9E29-CE63E583D715}"
+	ProjectSection(SolutionItems) = preProject
+		Config.txt = Config.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

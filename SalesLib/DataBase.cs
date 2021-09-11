@@ -115,6 +115,34 @@ namespace SalesLib
             }
         }
 
+        public void ImportProductsFromCSV(string path)
+        {
+            var products_csv = new List<Product>();
+            using var file = new StreamReader(path);
+            var line = string.Empty;
+            while ((line=file.ReadLine())!=null)
+            {
+                var temp = line.Split('|');
+                var product = new Product();
+                product.Id = uint.Parse(temp[0]);
+                product.Name = temp[1];
+                product.Price = uint.Parse(temp[2]);
+                products_csv.Add(product);
+            }
+
+            var products_db = GetProducts();
+            uint i = 1;
+            foreach (var product_db in products_db)
+            {
+                foreach (var product_csv in products_csv)
+                {
+                    if (products_db == products_csv) continue;
+                    products.Add(new Product { Id = i, Name = product_csv.Name, Price = product_csv.Price });
+                    i++;
+                }
+            }
+        }
+
        
     }
 }

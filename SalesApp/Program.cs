@@ -21,7 +21,6 @@ namespace SalesApp
                     ExportProducts();
                     break;
 
-
             }
 
         }

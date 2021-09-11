@@ -14,7 +14,7 @@ namespace SalesLib
 
         public DataBase()
         {
-            var connectionString = ConnectionString.Init(@"C:\Users\Admin\source\repos\Sales\db_connection.ini");
+            var connectionString = ConnectionString.Init(@"db_connection.ini");
             db = new MySqlConnection(connectionString);
             command = new MySqlCommand { Connection = db };
         }           

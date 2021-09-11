@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SalesLib
 {
@@ -102,6 +103,16 @@ namespace SalesLib
             command.CommandText = sql;
             command.ExecuteNonQuery();
             Close();
+        }
+
+        public void ExportProductsToCSV(string path)
+        {
+            var products = GetProducts();
+            using var file = new StreamWriter(path, false);
+            foreach (var product in products)
+            {
+                file.WriteLine($"{product.Id}|{product.Name}|{product.Price}");
+            }
         }
 
        

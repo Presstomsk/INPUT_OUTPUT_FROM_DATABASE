@@ -21,7 +21,7 @@ namespace CLI
         public static void Info(string message)
         {
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine($"[INFO] {message}");
+            Console.WriteLine($"{message}");
             Console.ResetColor();
         }
 
@@ -37,6 +37,13 @@ namespace CLI
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write(message);
             Console.ResetColor();
+        }
+
+        public static void Menu()
+        {
+            Info("Выберите режим работы:");
+            Info("1. Оформление заказа");
+            Info("2. Экспорт списка продуктов");
         }
     }
 }

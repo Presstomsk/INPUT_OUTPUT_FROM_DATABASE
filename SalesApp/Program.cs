@@ -10,6 +10,24 @@ namespace SalesApp
     {
         static void Main()
         {
+            Show.Menu();
+            var select = Console.ReadLine();
+            switch(select)
+            {
+                case "1":  //1. Оформление заказа
+                    InitOrder();
+                    break;
+                case "2":  //2. Экспорт списка продуктов
+                    ExportProducts();
+                    break;
+
+
+            }
+
+        }
+
+        static void InitOrder()
+        {
             var db = new DataBase();
             var products = db.GetProducts();
             var buyers = db.GetBuyers();
@@ -73,15 +91,17 @@ namespace SalesApp
                 Buyer_id = buyer_id,
                 Seller_id = 1,
                 Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-                Product_id=product_id,
-                Amount=count_user,
-                Total_price=total_price
+                Product_id = product_id,
+                Amount = count_user,
+                Total_price = total_price
             };
 
-           db.AddNewOrder(order);
-
+            db.AddNewOrder(order);
         }
-
-        
+        static void ExportProducts()
+        {
+            var db = new DataBase();
+            db.ExportProductsToCSV("products.csv");
+        }
     }
 }

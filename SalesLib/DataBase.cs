@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 namespace SalesLib
 {
     public class DataBase
-    {
-        private const string CONN_STR = "Server=mysql60.hostland.ru;Database=host1323541_sbd06;Uid=host1323541_itstep;Pwd=269f43dc;";
+    {        
         private MySqlConnection db;
         private MySqlCommand command;
 
         public DataBase()
         {
-            db = new MySqlConnection(CONN_STR);
+            var connectionString = ConnectionString.Init(@"C:\Users\Admin\source\repos\Sales\db_connection.ini");
+            db = new MySqlConnection(connectionString);
             command = new MySqlCommand { Connection = db };
         }           
         

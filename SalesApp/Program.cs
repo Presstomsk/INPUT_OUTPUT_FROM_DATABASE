@@ -10,10 +10,11 @@ namespace SalesApp
     {
         static void Main()
         {
-            var db = new DataBase();            
+            var db = new DataBase();
             var products = db.GetProducts();
             var buyers = db.GetBuyers();
             Buyer buyer;
+
 
             foreach (var item in buyers)
             {
@@ -49,8 +50,8 @@ namespace SalesApp
                 return;
             }
 
-            var price = products[(int)(product_id-1)].Price;
-            var total_price = count_user * (price-price*buyer.Discount/100);
+            var price = products[(int)(product_id - 1)].Price;
+            var total_price = count_user * (price - price * buyer.Discount / 100);
 
             Show.PrintLn($"Вам необходимо заплатить - {total_price}");
             string symbol;
@@ -63,12 +64,21 @@ namespace SalesApp
             } while ((symbol != "y") && (symbol != "n"));
 
             // Добавить в программу  возможность добавления данных о покупке после ввода всей необходимой информации.
-           // Т.е.нужно от пользователя получить данные для всех полей таблицы tab_orders и написать запрос на добавление в неё строки. 
-           // Id продавца задан по умолчанию.
+            // Т.е.нужно от пользователя получить данные для всех полей таблицы tab_orders и написать запрос на добавление в неё строки. 
+            // Id продавца задан по умолчанию.
 
-           db.AddNewOrder(buyer_id, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), product_id,count_user,total_price);
+            Order order = new Order
+            {
+                Id = 0,
+                Buyer_id = buyer_id,
+                Seller_id = 1,
+                Date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                Product_id=product_id,
+                Amount=count_user,
+                Total_price=total_price
+            };
 
-
+           db.AddNewOrder(order);
 
         }
 

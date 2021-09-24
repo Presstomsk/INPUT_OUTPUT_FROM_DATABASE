@@ -20,6 +20,9 @@ namespace SalesApp
                 case "2":  //2. Экспорт списка продуктов
                     ExportProducts();
                     break;
+                case "3":  //3. Импорт списка продуктов
+                    ImportProducts();
+                    break;
 
             }
 
@@ -101,6 +104,12 @@ namespace SalesApp
         {
             var db = new DataBase();
             db.ExportProductsToCSV("products.csv");
+        }
+
+        static void ImportProducts()
+        {
+            var db = new DataBase();
+            db.ImportProductsFromCSV("products.csv");
         }
     }
 }

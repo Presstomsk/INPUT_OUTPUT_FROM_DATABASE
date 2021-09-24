@@ -26,6 +26,12 @@ namespace SalesApp
                 case "4": //4. Экспорт списка заказов
                     ExportOrders(); 
                     break;
+                case "5": //5. Экспорт списка людей с дисконтом
+                    ExportPeoplesWithDiscounts();
+                    break;
+                case "6"://6. Импорт списка людей
+                    ImportPeoples();
+                    break;
 
             }
 
@@ -116,10 +122,22 @@ namespace SalesApp
             db.ExportOrdersToCSV("orders.csv");
         }
 
+        static void ExportPeoplesWithDiscounts()
+        {
+            var db = new DataBase();
+            db.ExportPeoplesWithDiscountsToCSV("peoples.csv");
+        }
+
         static void ImportProducts()
         {
             var db = new DataBase();
             db.ImportProductsFromCSV("products.csv");
+        }
+
+        static void ImportPeoples()
+        {
+            var db = new DataBase();
+            db.ImportPeoplesFromCSV("peoples.csv");
         }
     }
 }

@@ -71,6 +71,31 @@ namespace SalesLib
 
         }
 
+        public List<People> GetPeoplesWithDiscounts()
+        {
+            Open();
+            var list = new List<People>();
+            var sql = @"SELECT tab_people.id,first_name,last_name,phone,type,discount FROM tab_people
+                          JOIN tab_buyers on tab_people.id = tab_buyers.people_id
+                          JOIN tab_discounts on tab_buyers.discount_id = tab_discounts.id;";
+            command.CommandText = sql;
+            var res = command.ExecuteReader();
+            if (!res.HasRows) return null;
+            while (res.Read())
+            {
+                var id = res.GetUInt32("id");
+                var first_name = res.GetString("first_name");
+                var last_name = res.GetString("last_name");
+                var phone = res.GetString("phone");
+                var type_discount = res.GetString("type");
+                var discount = res.GetUInt32("discount");                
+                list.Add(new People { Id = id, First_name=first_name, Last_name=last_name, Phone=phone, Type_discount=type_discount, Discount=discount});
+
+            }
+            Close();
+            return list;
+        }
+
         public uint GetProductCount(uint id)
         {
             Open();
@@ -150,6 +175,16 @@ namespace SalesLib
             }
         }
 
+        public void ExportPeoplesWithDiscountsToCSV(string path)
+        {
+            var peoples = GetPeoplesWithDiscounts();
+            using var file = new StreamWriter(path, false);
+            foreach (var person in peoples)
+            {
+                file.WriteLine($"{person.Id}|{person.First_name}|{person.Last_name}|{person.Phone}|{person.Type_discount}|{person.Discount}");
+            }
+        }
+
         public void ImportProductsFromCSV(string path)
         {
             var products_csv = new List<Product>();
@@ -175,6 +210,34 @@ namespace SalesLib
             Close();
         }
 
-       
+        public void ImportPeoplesFromCSV(string path)
+        {
+            var peoples_csv = new List<People>();
+            using var file = new StreamReader(path);
+            var line = string.Empty;
+            while ((line = file.ReadLine()) != null)
+            {
+                var temp = line.Split('|');
+                var people = new People();
+                people.Id = uint.Parse(temp[0]);
+                people.First_name = temp[1];
+                people.Last_name = temp[2];
+                people.Phone = temp[3];
+                people.Type_discount = temp[4];
+                people.Discount = uint.Parse(temp[5]);                
+                peoples_csv.Add(people);
+            }
+
+            Open();
+            foreach (var people in peoples_csv)
+            {
+                var sql = $"INSERT INTO tab_people (first_name, last_name, phone) VALUES ('{people.First_name}','{people.Last_name}','{people.Phone}');";                             
+                command.CommandText = sql;
+                command.ExecuteNonQuery();
+            }
+            Close();
+        }//Триггеры не поддерживаются в БД
+
+
     }
 }

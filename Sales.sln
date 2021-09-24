@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{380E7C0D-E997-40BA-9E29-CE63E583D715}"
 	ProjectSection(SolutionItems) = preProject
 		SalesApp\bin\Debug\net5.0\db_connection.ini = SalesApp\bin\Debug\net5.0\db_connection.ini
+		SalesApp\bin\Debug\net5.0\orders.csv = SalesApp\bin\Debug\net5.0\orders.csv
 		SalesApp\bin\Debug\net5.0\products.csv = SalesApp\bin\Debug\net5.0\products.csv
 	EndProjectSection
 EndProject

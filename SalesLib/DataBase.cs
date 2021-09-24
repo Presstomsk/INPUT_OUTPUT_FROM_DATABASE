@@ -46,6 +46,31 @@ namespace SalesLib
             
         }
 
+        public List<Order> GetOrders()
+        {
+            Open();
+            var list = new List<Order>();
+            var sql = "SELECT id,buyer_id,seller_id, date, product_id, amount, total_price FROM tab_orders;";
+            command.CommandText = sql;
+            var res = command.ExecuteReader();
+            if (!res.HasRows) return null;
+            while (res.Read())
+            {
+                var id = res.GetUInt32("id");
+                var buyer_id = res.GetUInt32("buyer_id");
+                var seller_id = res.GetUInt32("seller_id");
+                var date = res.GetString("date");
+                var product_id = res.GetUInt32("product_id");
+                var amount = res.GetUInt32("amount");
+                var total_price = res.GetUInt32("total_price");
+                list.Add(new Order { Id = id, Buyer_id = buyer_id, Seller_id = seller_id, Date=date, Product_id=product_id, Amount=amount, Total_price=total_price }) ;
+
+            }
+            Close();
+            return list;
+
+        }
+
         public uint GetProductCount(uint id)
         {
             Open();
@@ -103,6 +128,16 @@ namespace SalesLib
             command.CommandText = sql;
             command.ExecuteNonQuery();
             Close();
+        }
+
+        public void ExportOrdersToCSV(string path)
+        {
+            var orders = GetOrders();
+            using var file = new StreamWriter(path, false);
+            foreach (var order in orders)
+            {
+                file.WriteLine($"{order.Id}|{order.Buyer_id}|{order.Seller_id}|{order.Date}|{order.Product_id}|{order.Amount}|{order.Total_price}");
+            }
         }
 
         public void ExportProductsToCSV(string path)

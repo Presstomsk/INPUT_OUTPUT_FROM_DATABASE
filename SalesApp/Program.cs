@@ -23,6 +23,9 @@ namespace SalesApp
                 case "3":  //3. Импорт списка продуктов
                     ImportProducts();
                     break;
+                case "4": //4. Экспорт списка заказов
+                    ExportOrders(); 
+                    break;
 
             }
 
@@ -33,6 +36,7 @@ namespace SalesApp
             var db = new DataBase();
             var products = db.GetProducts();
             var buyers = db.GetBuyers();
+            
             Buyer buyer;
 
 
@@ -104,6 +108,12 @@ namespace SalesApp
         {
             var db = new DataBase();
             db.ExportProductsToCSV("products.csv");
+        }
+
+        static void ExportOrders()
+        {
+            var db = new DataBase();
+            db.ExportOrdersToCSV("orders.csv");
         }
 
         static void ImportProducts()

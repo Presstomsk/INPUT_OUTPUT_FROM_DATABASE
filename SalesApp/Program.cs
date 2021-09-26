@@ -29,7 +29,7 @@ namespace SalesApp
                 case "5": //5. Экспорт списка людей с дисконтом
                     ExportPeoplesWithDiscounts();
                     break;
-                case "6"://6. Импорт списка людей
+                case "6"://6. Импорт списка людей c дисконтом
                     ImportPeoples();
                     break;
 
@@ -137,7 +137,7 @@ namespace SalesApp
         static void ImportPeoples()
         {
             var db = new DataBase();
-            db.ImportPeoplesFromCSV("peoples.csv");
+            db.ImportPeoplesWithDiscountsFromCSV("peoples.csv");
         }
     }
 }

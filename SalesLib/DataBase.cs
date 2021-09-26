@@ -210,7 +210,7 @@ namespace SalesLib
             Close();
         }
 
-        public void ImportPeoplesFromCSV(string path)
+        public void ImportPeoplesWithDiscountsFromCSV(string path)
         {
             var peoples_csv = new List<People>();
             using var file = new StreamReader(path);
@@ -231,9 +231,35 @@ namespace SalesLib
             Open();
             foreach (var people in peoples_csv)
             {
+                int flag_1=0, flag_2=0;
                 var sql = $"INSERT INTO tab_people (first_name, last_name, phone) VALUES ('{people.First_name}','{people.Last_name}','{people.Phone}');";                             
                 command.CommandText = sql;
-                command.ExecuteNonQuery();
+                flag_1 = command.ExecuteNonQuery();
+                if (flag_1 == 1)
+                {
+                    sql = $"INSERT INTO tab_discounts (type, discount) VALUES ('{people.Type_discount}',{people.Discount});";
+                    command.CommandText = sql;
+                    flag_2 = command.ExecuteNonQuery();
+                }
+                if (flag_2 == 1)
+                {
+                    sql = $"SELECT max(id) as max_people FROM tab_people;";
+                    command.CommandText = sql;
+                    var res = command.ExecuteReader();
+                    res.Read();
+                    var people_id = res.GetUInt32("max_people");
+                    res.Close();
+                    sql = $"SELECT max(id) as max_discounts FROM tab_discounts;";
+                    command.CommandText = sql;
+                    res = command.ExecuteReader();
+                    res.Read();
+                    var discount_id = res.GetUInt32("max_discounts");
+                    res.Close();
+                    sql = $"INSERT INTO tab_buyers (people_id, discount_id) VALUES ({people_id},{discount_id});";
+                    command.CommandText = sql;
+                    command.ExecuteNonQuery();
+                }
+                
             }
             Close();
         }//Триггеры не поддерживаются в БД
